@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment Variables
+.env
+.env.local
+
+# Build output
+dist/
+.next/
+out/
+
+# Prisma
+backend/prisma/migrations
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
