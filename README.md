@@ -4,8 +4,8 @@ Full-stack web application for booking travel experiences.
 
 ## Live Demo
 
-- **Frontend**: https://bookit-assignment.vercel.app
-- **Backend API**: https://bookit-backend-xxxx.onrender.com/api/health
+- **Frontend**: https://bookit-assignment-9cjg.vercel.app/
+- **Backend API**: https://bookit-backend-drc0.onrender.com/api/health
 
 ## Tech Stack
 
@@ -32,7 +32,20 @@ Full-stack web application for booking travel experiences.
 
 ## Screenshots
 
-[Add screenshots here]
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Experience Details
+![Details Page](screenshots/details.png)
+![Details Page](screenshots/details2.png)
+
+### Checkout
+![Checkout Page](screenshots/checkout.png)
+
+### Booking Confirmation
+![Success Page](screenshots/success.png)
+
+
 
 ## Local Development
 
@@ -79,9 +92,9 @@ npm run dev
 
 ## Author
 
-[Your Name]
-- Email: your.email@example.com
-- GitHub: [@yourusername](https://github.com/yourusername)
+[Chandan Prajapati]
+- Email: chandan789633@gmail.com
+- GitHub: [@ChandanP07](https://github.com/ChandanP07)
 
 ## Assignment
 
