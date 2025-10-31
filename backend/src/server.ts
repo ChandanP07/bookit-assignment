@@ -5,6 +5,9 @@ import { connectDB } from './config/database';
 import experienceRoutes from './routes/experiences';
 import bookingRoutes from './routes/bookings';
 import promoRoutes from './routes/promo';
+import seedRoutes from './routes/seed';
+
+
 
 dotenv.config();
 
@@ -15,6 +18,8 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Add this line with other routes
+app.use('/api/seed', seedRoutes);
 
 // Connect to MongoDB
 connectDB();
