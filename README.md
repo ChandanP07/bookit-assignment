@@ -33,17 +33,17 @@ Full-stack web application for booking travel experiences.
 ## Screenshots
 
 ### Home Page
-![Home Page](screenshots/home.png)
+![Home Page](https://github.com/user-attachments/assets/eea7a9ec-988d-476c-89a5-cf02ee4aa02b)
 
 ### Experience Details
-![Details Page](screenshots/details.png)
-![Details Page](screenshots/details2.png)
+![Details Page](https://github.com/user-attachments/assets/daff2d68-6f63-4340-adce-1e3981d7813d)
+![Details Page](https://github.com/user-attachments/assets/93f9a172-2a1d-49ba-a6e5-6a878e25ce06)
 
 ### Checkout
-![Checkout Page](screenshots/checkout.png)
+![Checkout Page](https://github.com/user-attachments/assets/b8df8e17-97b1-42e7-a478-f1543a6583b9)
 
 ### Booking Confirmation
-![Success Page](screenshots/success.png)
+![Success Page](https://github.com/user-attachments/assets/33a645f8-48de-472f-ac97-c9b84b9391aa)
 
 
 
