@@ -9,6 +9,8 @@ import seedRoutes from './routes/seed';
 
 
 
+
+
 dotenv.config();
 
 const app = express();
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Add this line with other routes
 app.use('/api/seed', seedRoutes);
+
 
 // Connect to MongoDB
 connectDB();
