@@ -18,6 +18,7 @@ export default function ExperienceDetails() {
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [slotsLoading, setSlotsLoading] = useState(false);
 
   const dates = Array.from({ length: 5 }, (_, i) => {
     const date = addDays(new Date(), i);
@@ -25,15 +26,19 @@ export default function ExperienceDetails() {
   });
 
   useEffect(() => {
-    fetchExperience();
-    if (dates[0]) {
-      setSelectedDate(dates[0]);
-    }
+    const init = async () => {
+      await fetchExperience();
+      // Set initial date and fetch slots immediately
+      const initialDate = format(new Date(), 'yyyy-MM-dd');
+      setSelectedDate(initialDate);
+      await fetchSlotsForDate(initialDate);
+    };
+    init();
   }, [experienceId]);
 
   useEffect(() => {
     if (selectedDate) {
-      fetchSlots();
+      fetchSlotsForDate(selectedDate);
     }
   }, [selectedDate]);
 
@@ -48,14 +53,17 @@ export default function ExperienceDetails() {
     }
   };
 
-  const fetchSlots = async () => {
+  const fetchSlotsForDate = async (date: string) => {
+    setSlotsLoading(true);
     try {
-      const data = await experienceApi.getSlots(experienceId, selectedDate);
+      const data = await experienceApi.getSlots(experienceId, date);
       setSlots(data);
       setSelectedSlot(null);
     } catch (error) {
       console.error('Error fetching slots:', error);
       setSlots([]);
+    } finally {
+      setSlotsLoading(false);
     }
   };
 
@@ -158,7 +166,11 @@ export default function ExperienceDetails() {
 
                 <div className="pr-2">
                   <h2 className="text-base sm:text-sm font-bold text-[#161616] mb-2">Choose time</h2>
-                  {slots.length > 0 ? (
+                  {slotsLoading ? (
+                    <div className="flex justify-center py-4">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#161616]"></div>
+                    </div>
+                  ) : slots.length > 0 ? (
                     <>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         {slots.map((slot) => {

@@ -7,9 +7,6 @@ import bookingRoutes from './routes/bookings';
 import promoRoutes from './routes/promo';
 
 
-
-
-
 dotenv.config();
 
 const app = express();
@@ -21,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-// Connect to MongoDB
+// Connect to Database
 connectDB();
 
 // Routes

@@ -57,8 +57,8 @@ export default function Checkout() {
     formData.userEmail.trim() !== '' &&
     agreedToTerms;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!bookingData || !isFormValid) return;
 
     setLoading(true);
@@ -248,7 +248,7 @@ export default function Checkout() {
               </div>
 
               <button
-                onClick={handleSubmit}
+                onClick={() => handleSubmit()}
                 disabled={!isFormValid || loading}
                 className={`w-full py-3 rounded-lg font-bold text-sm mt-6 ${isFormValid && !loading
                   ? 'bg-[#FFD643] text-black cursor-pointer'

@@ -47,14 +47,56 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/slots', async (req, res) => {
   try {
     const { date } = req.query;
-    
-    const slots = await prisma.slot.findMany({
+    const experienceId = req.params.id;
+
+    // Verify experience exists
+    const experience = await prisma.experience.findUnique({
+      where: { id: experienceId }
+    });
+
+    if (!experience) {
+      return res.status(404).json({ success: false, message: 'Experience not found' });
+    }
+
+    let slots = await prisma.slot.findMany({
       where: {
-        experienceId: req.params.id,
+        experienceId,
         ...(date && { date: date as string })
       },
       orderBy: [{ date: 'asc' }, { timeSlot: 'asc' }]
     });
+
+    // Auto-generate slots for the requested date if none exist
+    if (slots.length === 0 && date) {
+      const timeSlots = [
+        '06:00 AM - 09:00 AM',
+        '09:00 AM - 12:00 PM',
+        '12:00 PM - 03:00 PM',
+        '03:00 PM - 06:00 PM',
+      ];
+
+      // Create 2-3 random slots for the requested date
+      const numSlots = Math.floor(Math.random() * 2) + 2;
+      const createdSlots = [];
+      for (let i = 0; i < numSlots; i++) {
+        try {
+          const slot = await prisma.slot.create({
+            data: {
+              experienceId,
+              date: date as string,
+              timeSlot: timeSlots[i],
+              availableSeats: experience.maxParticipants,
+              bookedSeats: Math.floor(Math.random() * 3),
+            },
+          });
+          createdSlots.push(slot);
+        } catch (err) {
+          // Skip if slot already exists (unique constraint)
+        }
+      }
+
+      slots = createdSlots;
+    }
 
     const slotsWithStatus = slots.map((slot: any) => ({
       ...slot,
